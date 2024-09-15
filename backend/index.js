@@ -1,6 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import fileUpload from 'express-fileupload';
+import multer from 'multer';
 
 import userRoute from './routes/user.route.js';
 
@@ -11,6 +13,15 @@ const MONGO_URI = process.env.MONGO_URI;
 
 // Middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(fileUpload(
+    {
+        useTempFiles: true,
+        tempFileDir: '/tmp/',
+    }
+));
+app.use('/assets', express.static('assets'));
 
 // DB connection
 try {
