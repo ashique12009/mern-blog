@@ -81,3 +81,21 @@ export const getBlog = async (req, res) => {
         return res.status(500).json({message: 'Internal server error'});
     }
 }
+
+export const myBlogs = async (req, res) => {
+    try {
+        const {id} = req.params;
+
+        // Validate the id format
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({message: 'Invalid user id'});
+        }
+
+        const blogs = await Blog.find({createdBy: id});
+        return res.status(200).json({message: 'Blogs fetched successfully', blogs});
+    }
+    catch (error) {
+        console.log(error, 'Error fetching blogs');
+        return res.status(500).json({message: 'Internal server error'});
+    }
+}
