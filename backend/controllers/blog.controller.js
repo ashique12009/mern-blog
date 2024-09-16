@@ -99,3 +99,28 @@ export const myBlogs = async (req, res) => {
         return res.status(500).json({message: 'Internal server error'});
     }
 }
+
+export const updateBlog = async (req, res) => {
+    try {
+        const {id} = req.params;
+
+        // Validate the id format
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({message: 'Invalid blog id'});
+        }
+
+        const {title, blogImage, category, about, photo, education, role} = req.body;
+
+        // Validation
+        if (!title || !blogImage || !category) {
+            return res.status(400).json({message: 'Please enter all fields'});
+        }
+
+        const updateBlog = await Blog.findByIdAndUpdate(id, req.body, {new: true});
+        return res.status(200).json({message: 'Blog updated successfully', updateBlog});
+    }
+    catch (error) {
+        console.log(error, 'Error updating blog');
+        return res.status(500).json({message: 'Internal server error'});
+    }
+}
