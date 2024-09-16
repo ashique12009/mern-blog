@@ -25,3 +25,13 @@ export const isAuthenticated = async (req, res, next) => {
         console.log(error, 'Error authenticating user');    
     }
 }
+
+// Authorization
+export const isAdmin = (...roles) => {
+    return (req, res, next) => {
+        if (!roles.includes(req.user.role)) {
+            return res.status(403).json({message: 'Forbidden, you are not an admin'});
+        }
+        next();
+    }
+}
