@@ -92,3 +92,25 @@ export const logout = (req, res) => {
         return res.status(500).json({message: 'Internal server error'});
     }   
 }
+
+export const myProfile = async (req, res) => {
+    try {
+        const user = req.user;
+        return res.status(200).json({message: 'User profile fetched successfully', user});
+    } 
+    catch (error) {
+        console.log(error, 'Error fetching user');
+        return res.status(500).json({message: 'Internal server error'});
+    }
+}
+
+export const allAdmins = async (req, res) => {
+    try {
+        const admins = await User.find({role: 'admin'});
+        return res.status(200).json({message: 'Admins fetched successfully', admins});
+    } 
+    catch (error) {
+        console.log(error, 'Error fetching admins');
+        return res.status(500).json({message: 'Internal server error'});
+    }
+}
