@@ -7,7 +7,6 @@ const blogSchema = new mongoose.Schema({
     },
     blogImage: {
         type: String,
-        required: true,
         default: '/assets/pp.png'
     },
     category: {
@@ -25,7 +24,6 @@ const blogSchema = new mongoose.Schema({
     },
     adminPhoto: {
         type: String,
-        // required: true,
         default: '/assets/pp.png'
     },
     createdBy: {
