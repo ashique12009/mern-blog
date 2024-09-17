@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import fileUpload from 'express-fileupload';
 import multer from 'multer';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 import userRoute from './routes/user.route.js';
 import blogRoute from './routes/blog.route.js';
@@ -14,6 +15,11 @@ const port = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI;
 
 // Middleware
+app.use(cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE']
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
