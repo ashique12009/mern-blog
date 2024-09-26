@@ -2,9 +2,11 @@ import express from 'express'
 import { login, register, logout, myProfile, allAdmins } from '../controllers/user.controller.js';
 import { isAdmin, isAuthenticated } from '../middleware/authUser.js';
 
+import upload from '../middleware/multerConfig.js'; // Multer config
+
 const router = express.Router();
 
-router.post('/register', register);
+router.post('/register', upload.single('photo'), register);
 router.post('/login', login);
 router.post('/logout', isAuthenticated, logout);
 router.get('/my-profile', isAuthenticated, myProfile);

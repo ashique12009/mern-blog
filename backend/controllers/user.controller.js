@@ -1,13 +1,15 @@
 import { User } from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import createTokenAndSaveCookie from "../jwt/AuthToken.js";
+import path from 'path';
+import fs from 'fs';
 
 export const register = async (req, res) => {
     try {
-        const {email, name, password, phone, photo, education, role} = req.body;
+        const {email, name, password, phone, education, role} = req.body;
 
         // Validation
-        if (!name || !email || !password || !phone || !photo || !education || !role) {
+        if (!name || !email || !password || !phone || !education || !role) {
             return res.status(400).json({message: 'Please enter all fields'});
         }
 
@@ -20,13 +22,19 @@ export const register = async (req, res) => {
         // Hash password
         const hashedPassword = await bcrypt.hash(password, 7);
 
+        // Handle photo upload (if provided)
+        let photoPath = '';
+        if (req.file) {
+            photoPath = req.file.path;
+        }
+
         // Create new user
         const newUser = new User({
             name,
             email,
             password: hashedPassword,
             phone,
-            photo,
+            photo: photoPath, // Get the path of the uploaded image, Save it in MongoDB
             education,
             role
         });

@@ -1,8 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import fileUpload from 'express-fileupload';
-import multer from 'multer';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 
@@ -18,18 +16,12 @@ const MONGO_URI = process.env.MONGO_URI;
 app.use(cors({
     origin: process.env.FRONTEND_URL,
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE']
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use(fileUpload(
-    {
-        useTempFiles: true,
-        tempFileDir: '/tmp/',
-    }
-));
 app.use('/assets', express.static('assets'));
 
 // DB connection
