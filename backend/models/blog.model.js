@@ -7,7 +7,7 @@ const blogSchema = new mongoose.Schema({
     },
     blogImage: {
         type: String,
-        default: '/assets/pp.png'
+        default: 'assets/blog-default.jpg'
     },
     category: {
         type: String,
@@ -24,7 +24,7 @@ const blogSchema = new mongoose.Schema({
     },
     adminPhoto: {
         type: String,
-        default: '/assets/pp.png'
+        default: 'assets/pp.png'
     },
     createdBy: {
         type: mongoose.Schema.ObjectId,

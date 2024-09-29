@@ -10,6 +10,7 @@ import Register from './pages/Register'
 import Footer from './components/Footer'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { useAuth } from './context/AuthProvider'
+import { Toaster } from 'react-hot-toast'
 
 const App = () => {
 
@@ -34,6 +35,8 @@ const App = () => {
                 <Route exact path="/login" element={<Login />} />
                 <Route exact path="/register" element={<Register />} />
             </Routes>
+
+            <Toaster position='top-right' />
             
             {/* Conditional rendering */}
             { !hideNavbarFooter && <Footer /> }

@@ -10,9 +10,10 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const fetchBlogs = async () => {
             try {
-                const response = await axios.get('http://localhost:4001/api/blogs/all-blogs')
-                setBlogs(response.data)
-            } 
+                const apiBaseUrl = import.meta.env.VITE_BACKEND_API_BASE_URL
+                const response = await axios.get(`${apiBaseUrl}/blogs/all-blogs`)
+                setBlogs(response.data.blogs)
+            }
             catch (error) {
                 console.log(error, 'Error fetching blogs');
             }

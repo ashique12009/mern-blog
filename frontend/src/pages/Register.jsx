@@ -35,7 +35,8 @@ const Register = () => {
         formData.append('education', education)
         formData.append('photo', photo)
         try {
-            const response = await axios.post('http://localhost:4001/api/users/register', formData)
+            const apiBaseUrl = import.meta.env.VITE_BACKEND_API_BASE_URL
+            const response = await axios.post(`${apiBaseUrl}/users/register`, formData)
             console.log(response)
             setName('')
             setEmail('')
@@ -55,8 +56,8 @@ const Register = () => {
         <>
             <div className='min-h-screen flex items-center justify-center bg-gray-100'>
                 <div className='w-full max-w-md bg-white shadow-md rounded-lg p-8'>
-                    <form onSubmit={handleRegister}>
-                        <div className='font-semibold text-xl items-center text-center'>My Blog</div>
+                    <form>
+                        <div className='font-semibold text-xl items-center text-center'>My <span className='text-blue-500'>Blog</span></div>
                         <h1 className='text-xl font-semibold mb-6'>Register</h1>
                         <select value={role} onChange={(e) => setRole(e.target.value)} className='w-full p-2 mb-4 border rounded-md'>
                             <option value="">Select Role</option>

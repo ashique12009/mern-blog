@@ -67,13 +67,13 @@ export const login = async (req, res) => {
         // Check if user exists
         const existingUser = await User.findOne({email}).select('+password');
         if (!existingUser) {
-            return res.status(400).json({message: 'User does not exist'});
+            return res.status(200).json({message: 'User does not exist'});
         }
 
         // Check if password is correct
         const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
         if (!isPasswordCorrect) {
-            return res.status(400).json({message: 'Invalid credentials'});
+            return res.status(200).json({message: 'Invalid credentials', success: false});
         }
 
         // Chcek role
@@ -82,7 +82,7 @@ export const login = async (req, res) => {
         }
 
         const token = await createTokenAndSaveCookie(existingUser._id, res);
-        return res.status(200).json({message: 'Login successful', user: existingUser, token: token});
+        return res.status(200).json({message: 'Login successful', user: existingUser, token: token, success: true});
     }
     catch (error) {
         console.log(error, 'Error logging in');
