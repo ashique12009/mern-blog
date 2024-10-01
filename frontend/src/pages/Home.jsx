@@ -1,8 +1,8 @@
 import React from 'react'
 import Hero from '../home-page-component/Hero'
 import Trending from '../home-page-component/Trending'
-import { useAuth } from '../context/AuthProvider'
 import Devotional from '../home-page-component/Devotional'
+import Creator from '../home-page-component/Creator'
 
 const Home = () => {
 
@@ -11,6 +11,7 @@ const Home = () => {
             <Hero />
             <Trending />
             <Devotional />
+            <Creator />
         </div>
     )
 }

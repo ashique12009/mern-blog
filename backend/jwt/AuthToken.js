@@ -10,7 +10,7 @@ const createTokenAndSaveCookie = async (userId, response) => {
 
     response.cookie('jwt', token, {
         httpOnly: true, // protect from XSS
-        sameSite: 'strict', // protect from CSRF
+        sameSite: 'none', // protect from CSRF
         secure: true, // only send cookie over https
         maxAge: 24 * 60 * 60 * 1000
     });

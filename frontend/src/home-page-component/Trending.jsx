@@ -47,7 +47,7 @@ const Trending = () => {
                                     <img src={`${backendBaseUrl}/${element.adminPhoto}`} alt={element.author} className='w-10 h-10 rounded-full border-2 border-yellow-500' />
                                     <div className='ml-4'>
                                         <p>{element.adminName}</p>
-                                        <p>New</p>
+                                        <p className='text-xs'>Category: {element.category}</p>
                                     </div>
                                 </div>
                             </Link>

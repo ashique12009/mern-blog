@@ -1,9 +1,11 @@
 import React from 'react'
 
 const Footer = () => {
-  return (
-    <div>Footer</div>
-  )
+    return (
+        <div className='container mx-auto mt-4'>
+            Footer
+        </div>
+    )
 }
 
 export default Footer

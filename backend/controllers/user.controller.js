@@ -1,8 +1,6 @@
 import { User } from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import createTokenAndSaveCookie from "../jwt/AuthToken.js";
-import path from 'path';
-import fs from 'fs';
 
 export const register = async (req, res) => {
     try {
@@ -113,6 +111,17 @@ export const myProfile = async (req, res) => {
 }
 
 export const allAdmins = async (req, res) => {
+    try {
+        const admins = await User.find({role: 'admin'});
+        return res.status(200).json({message: 'Admins fetched successfully', admins});
+    } 
+    catch (error) {
+        console.log(error, 'Error fetching admins');
+        return res.status(500).json({message: 'Internal server error'});
+    }
+}
+
+export const allAdminsGuest = async (req, res) => {
     try {
         const admins = await User.find({role: 'admin'});
         return res.status(200).json({message: 'Admins fetched successfully', admins});
