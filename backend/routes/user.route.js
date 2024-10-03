@@ -1,6 +1,6 @@
 import express from 'express'
 import { login, register, logout, myProfile, allAdmins, allAdminsGuest } from '../controllers/user.controller.js';
-import { isAdmin, isAuthenticated } from '../middleware/authUser.js';
+import { isAdmin, isAuthenticated, checkAuth } from '../middleware/authUser.js';
 
 import upload from '../middleware/multerConfig.js'; // Multer config
 
@@ -12,5 +12,6 @@ router.post('/logout', isAuthenticated, logout);
 router.get('/my-profile', isAuthenticated, myProfile);
 router.get('/admins', isAuthenticated, isAdmin('admin'), allAdmins);
 router.get('/admins-guest', allAdminsGuest);
+router.get('/check-auth', checkAuth);
 
 export default router;

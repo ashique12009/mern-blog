@@ -91,12 +91,12 @@ export const login = async (req, res) => {
 export const logout = (req, res) => {
     try {
         res.clearCookie('jwt');
-        return res.status(200).json({message: 'Logout successful'});
+        return res.status(200).json({message: 'Logout successful', success: true});
     } 
     catch (error) {
         console.log(error, 'Error logging out');
         return res.status(500).json({message: 'Internal server error'});
-    }   
+    }
 }
 
 export const myProfile = async (req, res) => {

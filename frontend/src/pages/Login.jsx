@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [role, setRole] = useState('')
+
+    const navigateTo = useNavigate()
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -25,7 +28,8 @@ const Login = () => {
             const response = await axios.post(`${apiBaseUrl}/users/login`, formData, {
                 headers: {
                     'Content-Type': 'application/json'
-                }
+                },
+                withCredentials: true
             })
             
             setEmail('')
@@ -34,6 +38,8 @@ const Login = () => {
 
             if (response.data.success) {
                 toast.success(response.data.message)
+                // Redirect to dashboard
+                navigateTo('/dashboard')
             }
             else {
                 toast.error(response.data.message)

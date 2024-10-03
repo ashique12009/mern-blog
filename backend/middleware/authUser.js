@@ -26,6 +26,29 @@ export const isAuthenticated = async (req, res, next) => {
     }
 }
 
+export const checkAuth = async (req, res, next) => {
+    try {
+        const token = req.cookies.jwt;
+        
+        if (!token) {
+            return res.status(401).json({message: 'Unauthorized', success: false});
+        }
+        
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
+
+        if(!decodedToken) {
+            return res.status(401).json({message: 'Unauthorized', success: false});
+        }
+
+        return res.status(200).json({message: 'Authenticated', success: true});
+
+        next();
+    } 
+    catch (error) {
+        console.log(error, 'Error authenticating user');
+    }
+}
+
 // Authorization
 export const isAdmin = (...roles) => {
     return (req, res, next) => {

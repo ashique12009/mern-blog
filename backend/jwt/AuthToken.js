@@ -8,11 +8,12 @@ const createTokenAndSaveCookie = async (userId, response) => {
         { expiresIn: '1d' }
     );
 
+    // Set JWT as a cookie in the browser
     response.cookie('jwt', token, {
-        httpOnly: true, // protect from XSS
-        sameSite: 'none', // protect from CSRF
-        secure: true, // only send cookie over https
-        maxAge: 24 * 60 * 60 * 1000
+        httpOnly: true,      // Prevent client-side JS from accessing the token
+        sameSite: 'none',    // Allow cross-origin requests
+        secure: true,        // Ensure the cookie is only sent over HTTPS
+        maxAge: 24 * 60 * 60 * 1000 // 1 day in milliseconds
     });
 
     await User.findByIdAndUpdate(userId, { token });
