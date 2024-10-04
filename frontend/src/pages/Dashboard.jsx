@@ -22,27 +22,6 @@ const Dashboard = () => {
         }
     }
 
-    const checkAuth = async () => {
-        try {
-            const apiBaseUrl = import.meta.env.VITE_BACKEND_API_BASE_URL
-            const response = await axios.get(`${apiBaseUrl}/users/check-auth`, {
-                withCredentials: true
-            })
-
-            if (!response.data.success) {
-                navigateTo('/')
-            }
-        } 
-        catch (error) {
-            console.log('Error authenticating user', error);
-            if (error.response && error.response.status === 401) {
-                navigateTo('/')
-            }
-        }
-    }
-
-    checkAuth()
-
     return (
         <div className='container mx-auto'>
             <div>

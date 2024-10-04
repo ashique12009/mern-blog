@@ -11,6 +11,7 @@ import Footer from './components/Footer'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import Dashboard from './pages/Dashboard'
+import ProtectedRoute from './components/ProtectedRoute' // Higher order component
 
 const App = () => {
 
@@ -31,7 +32,7 @@ const App = () => {
                 <Route exact path="/contact" element={<Contact />} />
                 <Route exact path="/login" element={<Login />} />
                 <Route exact path="/register" element={<Register />} />
-                <Route exact path="/dashboard" element={<Dashboard />} />
+                <Route exact path="/dashboard" element={<ProtectedRoute component={Dashboard} />} />
             </Routes>
 
             <Toaster position='top-right' />
