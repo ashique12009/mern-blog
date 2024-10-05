@@ -4,9 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { CiMenuBurger } from 'react-icons/ci'
 
-const Sidebar = ({setComponent}) => {
-    console.log('setComponent', setComponent)
-    const {blogs, profile} = useAuth()
+const Sidebar = ({ setComponent }) => {
+    const {profile} = useAuth()
 
     const navigateTo = useNavigate()
 

@@ -45,8 +45,6 @@ export const AuthProvider = ({ children }) => {
             }
         };
 
-        
-
         fetchBlogs()
         fetchProfile()
         getProfile()

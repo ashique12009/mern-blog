@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useAuth } from '../context/AuthProvider'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 const MyBlogs = () => {
     const [myBlogs, setMyBlogs] = useState([]);
 
     const { profile } = useAuth();
-    console.log(profile);
-    const userID = profile._id;
+    const userID = profile?._id;
 
     const backendBaseUrl = import.meta.env.VITE_BACKEND_BASE_URL
 
@@ -20,14 +20,53 @@ const MyBlogs = () => {
                     `${apiBaseUrl}/blogs/myblogs/${userID}`,
                     { withCredentials: true }
                 );
-                
+
                 setMyBlogs(data.blogs);
-            } catch (error) {
+            } 
+            catch (error) {
                 console.log(error);
             }
         };
         fetchMyBlogs();
     }, []);
+
+    const handleDelete = async (blogId) => {
+        try {
+            Swal.fire({
+                title: "Are you sure you want to delete?",
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'Yes',
+                denyButtonText: 'No'
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    const apiBaseUrl = import.meta.env.VITE_BACKEND_API_BASE_URL
+                    const response = await axios.delete(
+                        `${apiBaseUrl}/blogs/delete/${blogId}`,
+                        { withCredentials: true }
+                    );
+
+                    if (response.data.success) {
+                        // For now reload the page concept will be added later
+                        // Now re-arranging the blog array
+                        // Update the blogs state based on filtering out the deleted one
+                        setMyBlogs((prevBlogs) => {
+                            const updatedBlogs = prevBlogs.filter((blog) => blog._id !== blogId);
+                            return updatedBlogs; // Correct return of new filtered blogs
+                        });
+
+                        Swal.fire("Blog deleted successfully!", "", "success");
+                    }
+                } 
+                // else if (result.isDenied) {
+                //     Swal.fire("Changes are not saved", "", "info");
+                // }
+            });
+        } 
+        catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
         <div>

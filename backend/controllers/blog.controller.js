@@ -1,5 +1,12 @@
 import mongoose from "mongoose";
 import { Blog } from "../models/blog.model.js";
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Construct __dirname equivalent
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export const createBlog = async (req, res) => {
     try {
@@ -45,7 +52,26 @@ export const deleteBlog = async (req, res) => {
     try {
         const {id} = req.params;
         const blog = await Blog.findByIdAndDelete(id);
-        return res.status(200).json({message: 'Blog deleted successfully', blog});
+
+        // Construct the correct file path
+        const imagePath = path.join(__dirname, '..', blog.blogImage);
+
+        // Delete physical photo
+        if (fs.existsSync(imagePath)) {
+            fs.unlink(imagePath, (err) => {
+                if (err) {
+                    console.log('File deletion error', err);
+                } 
+                else {
+                    console.log('File deleted successfully:', imagePath);
+                }
+            });
+        } 
+        else {
+            console.log('File not found at:', imagePath);
+        }
+
+        return res.status(200).json({message: 'Blog deleted successfully', blog, success: true});
     }
     catch (error) {
         console.log(error, 'Error deleting blog');

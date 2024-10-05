@@ -14,8 +14,6 @@ const Creator = () => {
                 const apiBaseUrl = import.meta.env.VITE_BACKEND_API_BASE_URL
                 const response = await axios.get(`${apiBaseUrl}/users/admins-guest`)
                 setAdmin(response.data.admins)
-
-                console.log('response.data.admins', response.data.admins)
             }
             catch (error) {
                 console.log(error, 'Error fetching admins');
