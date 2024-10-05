@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useAuth } from '../context/AuthProvider'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import toast from 'react-hot-toast'
 
 const CreateBlog = () => {
     const [title, setTitle] = useState('')
@@ -44,9 +45,17 @@ const CreateBlog = () => {
             setAbout('')
             setBlogImage('')
             setBlogImagePreview('')
+
+            toast.success(response.data.message)
         }
         catch (error) {
-            console.log(error)
+            if (error.response && error.response.status === 400) {
+                // Show toast for validation errors
+                toast.error(error.response.data.message || 'Validation failed!');
+            } else {
+                // Show toast for other server errors
+                toast.error('An unexpected error occurred!');
+            }
         }
     }
 

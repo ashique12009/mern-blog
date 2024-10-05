@@ -7,7 +7,7 @@ export const createBlog = async (req, res) => {
 
         // Validation
         if (!title || !category) {
-            return res.status(400).json({message: 'Please enter all fields'});
+            return res.status(400).json({message: 'Please enter all fields', success: false});
         }
 
         const adminName = req?.user?.name;
@@ -33,7 +33,7 @@ export const createBlog = async (req, res) => {
         // Save blog
         const blog = await Blog.create(blogData);
 
-        return res.status(201).json({message: 'Blog created successfully', blog});
+        return res.status(201).json({message: 'Blog created successfully', blog, success: true});
     } 
     catch (error) {
         console.log(error, 'Error creating blog');
