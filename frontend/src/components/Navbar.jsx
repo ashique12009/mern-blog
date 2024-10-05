@@ -31,7 +31,7 @@ const Navbar = () => {
                         </div>
                     </div>
                     <div className='space-x-4 hidden md:flex'>
-                        <Link to='/dashboard'><button className='bg-blue-500 text-white px-4 py-1 rounded-md'>Dashboard</button></Link>
+                        <Link to='/register'><button className='bg-blue-500 text-white px-4 py-1 rounded-md'>Register</button></Link>
                         <Link to='/login'><button className='bg-red-500 text-white px-4 py-1 rounded-md'>Login</button></Link>
                     </div>
                 </div>
