@@ -44,7 +44,7 @@ const Sidebar = ({setComponent}) => {
                 <ul className='mx-4'>
                     <button className='w-full px-4 py-2 bg-green-500 rounded-lg hover:bg-green-600 text-white mb-2' onClick={() => handleComponent('My Blogs')}>My Blogs</button>
                     <button className='w-full px-4 py-2 bg-green-500 rounded-lg hover:bg-green-600 text-white mb-2' onClick={() => handleComponent('Create Blog')}>Create Blogs</button>
-                    <button className='w-full px-4 py-2 bg-green-500 rounded-lg hover:bg-green-600 text-white mb-2'>My Profile</button>
+                    <button className='w-full px-4 py-2 bg-green-500 rounded-lg hover:bg-green-600 text-white mb-2' onClick={() => handleComponent('My Profile')}>My Profile</button>
                     <button className='w-full px-4 py-2 bg-green-500 rounded-lg hover:bg-green-600 text-white' onClick={logout}>Logout</button>
                 </ul>
             </div>

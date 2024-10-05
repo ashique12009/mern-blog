@@ -20,7 +20,7 @@ const MyBlogs = () => {
                     `${apiBaseUrl}/blogs/myblogs/${userID}`,
                     { withCredentials: true }
                 );
-                console.log('MY BLOG DATA',data.blogs);
+                
                 setMyBlogs(data.blogs);
             } catch (error) {
                 console.log(error);

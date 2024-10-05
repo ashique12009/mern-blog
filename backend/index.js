@@ -28,7 +28,7 @@ app.use('/assets', express.static('assets'));
 try {
     mongoose.connect(MONGO_URI);
     console.log('MongoDB connected'); 
-} 
+}
 catch (error) {
     console.log(error, 'MongoDB connection error!');
 }
