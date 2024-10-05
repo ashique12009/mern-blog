@@ -3,10 +3,10 @@ import { Blog } from "../models/blog.model.js";
 
 export const createBlog = async (req, res) => {
     try {
-        const {title, blogImage, category, about, photo, education, role} = req.body;
+        const {title, category, about} = req.body;
 
         // Validation
-        if (!title || !blogImage || !category) {
+        if (!title || !category) {
             return res.status(400).json({message: 'Please enter all fields'});
         }
 
@@ -14,9 +14,15 @@ export const createBlog = async (req, res) => {
         const adminPhoto = req?.user?.photo;
         const createdBy = req?.user?._id;
 
+        // Handle photo upload (if provided)
+        let photoPath = '';
+        if (req.file) {
+            photoPath = req.file.path;
+        }
+
         const blogData = {
             title,
-            blogImage,
+            blogImage: photoPath,
             category,
             about,
             adminName,
