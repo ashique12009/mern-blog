@@ -101,12 +101,12 @@ export const logout = (req, res) => {
 
 export const myProfile = async (req, res) => {
     try {
-        const user = req.user;
-        return res.status(200).json({message: 'User profile fetched successfully', user});
+        const user = await req.user;
+        return res.status(200).json({message: 'User profile fetched successfully', user, success: true});
     } 
     catch (error) {
         console.log(error, 'Error fetching user');
-        return res.status(500).json({message: 'Internal server error'});
+        return res.status(500).json({message: 'Internal server error', success: false});
     }
 }
 

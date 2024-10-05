@@ -6,37 +6,14 @@ import UpdateBlog from '../dashboard/UpdateBlog'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthProvider'
 
 const Dashboard = () => {
-
-    const navigateTo = useNavigate()
-
-    const logout = async () => {
-        const apiBaseUrl = import.meta.env.VITE_BACKEND_API_BASE_URL
-        const response = await axios.post(`${apiBaseUrl}/users/logout`, {}, {
-            withCredentials: true
-        })
-
-        if (response.data.success) {
-            navigateTo('/')
-        }
-    }
 
     return (
         <div className='container mx-auto'>
             <div>
-                {/* <Sidebar component={component} setComponent={setComponent} />
-                {component === "My Profile" ? (
-                    <MyProfile />
-                ) : component === "Create Blog" ? (
-                    <CreateBlog />
-                ) : component === "Update Blog" ? (
-                    <UpdateBlog />
-                ) : (
-                    <MyBlogs />
-                )} */}
-                <h1>Dashboard</h1>
-                <Link to='#' onClick={logout}>Logout</Link>
+                <Sidebar />
             </div>
         </div>
     )

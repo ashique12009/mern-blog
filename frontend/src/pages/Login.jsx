@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthProvider'
 
 const Login = () => {
     const [email, setEmail] = useState('')
@@ -10,6 +11,8 @@ const Login = () => {
     const [role, setRole] = useState('')
 
     const navigateTo = useNavigate()
+
+    const { getProfile } = useAuth()
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -38,6 +41,13 @@ const Login = () => {
 
             if (response.data.success) {
                 toast.success(response.data.message)
+                // Store the token in localStorage
+                // So that if user refreshed the page it will not redirect again in login
+                localStorage.setItem("jwt", response.data.token); 
+
+                // Fetch profile
+                await getProfile()
+
                 // Redirect to dashboard
                 navigateTo('/dashboard')
             }
