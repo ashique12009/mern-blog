@@ -6,6 +6,8 @@ There are mainly two entities are here in this project.
 
 Api is the main backbone stuff in backend for user and blog.
 
+Backend will be deopyed in render
+
 # Frontend
 Frontend is made up by ReactJs.
 
@@ -28,3 +30,4 @@ Dashboard
 Create blog
 ![mern-blog-create](https://github.com/user-attachments/assets/34e0a844-3b74-47a7-b9eb-d36ba61ac93d)
 
+Frontend will be deployed in vercel
