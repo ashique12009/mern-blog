@@ -5,7 +5,6 @@ There are mainly two entities are here in this project.
 2. Blog
 
 Api is the main backbone stuff in backend for user and blog.
-Currently, two official plugins are available:
 
 # Frontend
 Frontend is made up by ReactJs.
