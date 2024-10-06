@@ -10,7 +10,7 @@ const createTokenAndSaveCookie = async (userId, response) => {
 
     // Set JWT as a cookie in the browser
     response.cookie('jwt', token, {
-        httpOnly: true,      // Prevent client-side JS from accessing the token
+        httpOnly: false,      // Prevent client-side JS from accessing the token
         sameSite: 'none',    // Allow cross-origin requests
         secure: true,        // Ensure the cookie is only sent over HTTPS
         maxAge: 24 * 60 * 60 * 1000 // 1 day in milliseconds
