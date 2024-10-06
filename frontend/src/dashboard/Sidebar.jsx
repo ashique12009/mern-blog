@@ -36,7 +36,7 @@ const Sidebar = ({ setComponent }) => {
             </div>
 
             <div className={`w-64 h-full shadow-lg fixed top-0 left-0 bg-gray-50 transition-transform duration-300 transform sm:translate-x-0 ${showSidebar ? "translate-x-0" : "-translate-x-full"}`}>
-                <div>
+                <div className='pt-4'>
                     { profile?.photo && <img src={`${backendBaseUrl}/${profile?.photo}`} alt="profile image" className='w-16 h-16 rounded-full mx-auto mb-2' /> }
                     <p className='text-lg font-semibold text-center'>{profile?.name}</p>
                 </div>
