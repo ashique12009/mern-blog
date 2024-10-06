@@ -10,6 +10,6 @@ router.delete('/delete/:id', isAuthenticated, isAdmin('admin'), deleteBlog);
 router.get('/all-blogs', getAllBlogs);
 router.get('/blog/:id', getBlog);
 router.get('/myblogs/:id', isAuthenticated, myBlogs);
-router.put('/update/:id', isAuthenticated, isAdmin('admin'), updateBlog);
+router.put('/update/:id', upload.single('photo'), isAuthenticated, isAdmin('admin'), updateBlog);
 
 export default router;

@@ -2,11 +2,6 @@ import React, { useState } from 'react'
 import Sidebar from '../dashboard/Sidebar'
 import MyProfile from '../dashboard/MyProfile'
 import CreateBlog from '../dashboard/CreateBlog'
-import UpdateBlog from '../dashboard/UpdateBlog'
-import { Link } from 'react-router-dom'
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthProvider'
 import MyBlogs from '../dashboard/MyBlogs'
 
 const Dashboard = () => {
@@ -28,7 +23,6 @@ const Dashboard = () => {
                 {
                     (component === 'My Profile') ? <MyProfile /> : null
                 }
-
             </div>
         </div>
     )

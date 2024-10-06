@@ -144,12 +144,26 @@ export const updateBlog = async (req, res) => {
         const {title, blogImage, category, about, photo, education, role} = req.body;
 
         // Validation
-        if (!title || !blogImage || !category) {
+        if (!title || !category) {
             return res.status(400).json({message: 'Please enter all fields'});
         }
 
-        const updateBlog = await Blog.findByIdAndUpdate(id, req.body, {new: true});
-        return res.status(200).json({message: 'Blog updated successfully', updateBlog});
+        // Construct updateData
+        const updateData = {
+            title,
+            category,
+            about
+        }
+
+        // Handle photo upload (if provided)
+        let photoPath = '';
+        if (req.file) {
+            photoPath = req.file.path;
+            updateData.blogImage = photoPath;
+        }
+
+        const updateBlog = await Blog.findByIdAndUpdate(id, updateData, {new: true});
+        return res.status(200).json({message: 'Blog updated successfully', updateBlog, success: true});
     }
     catch (error) {
         console.log(error, 'Error updating blog');

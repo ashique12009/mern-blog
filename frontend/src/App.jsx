@@ -14,11 +14,14 @@ import Dashboard from './pages/Dashboard'
 import ProtectedRoute from './components/ProtectedRoute' // Higher order component
 import CreateBlog from './dashboard/CreateBlog'
 import MyBlogs from './dashboard/MyBlogs'
+import UpdateBlog from './dashboard/UpdateBlog'
 
 const App = () => {
-
     const location = useLocation()
-    const hideNavbarFooter = ['/dashboard', '/login', '/register'].includes(location.pathname)
+
+    const isUpdateBlogPage = /^\/blog\/update\/[a-fA-F0-9]{24}$/.test(location.pathname);
+
+    const hideNavbarFooter = ['/dashboard', '/login', '/register'].includes(location.pathname) || isUpdateBlogPage
 
     return (
         <div>
@@ -35,6 +38,7 @@ const App = () => {
                 <Route exact path="/login" element={<Login />} />
                 <Route exact path="/register" element={<Register />} />
                 <Route exact path="/dashboard" element={<ProtectedRoute component={Dashboard} />} />
+                <Route exact path="/blog/update/:id" element={<ProtectedRoute component={UpdateBlog} />} />
             </Routes>
 
             <Toaster position='top-right' />

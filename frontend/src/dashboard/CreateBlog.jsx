@@ -1,7 +1,5 @@
 import React from 'react'
 import { useState } from 'react'
-import { useAuth } from '../context/AuthProvider'
-import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 

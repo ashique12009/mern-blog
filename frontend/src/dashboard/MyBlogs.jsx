@@ -43,7 +43,9 @@ const MyBlogs = () => {
                     const apiBaseUrl = import.meta.env.VITE_BACKEND_API_BASE_URL
                     const response = await axios.delete(
                         `${apiBaseUrl}/blogs/delete/${blogId}`,
-                        { withCredentials: true }
+                        { 
+                            withCredentials: true 
+                        }
                     );
 
                     if (response.data.success) {
